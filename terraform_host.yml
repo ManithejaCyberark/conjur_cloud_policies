@@ -1,0 +1,22 @@
+
+# conjur policy load -b data -f terraform_host.yml
+
+- !host
+  id: shared_policy/v1/api_key_conjur
+  annotations:
+    authn/api-key: true
+
+- !grant
+  role: !group  vault/ADO_Secret/delegation/consumers
+  member: !host /data/shared_policy/v1/api_key_conjur
+
+
+#conjur policy load -b data -f terraform_host.yml
+# - !host
+#   id: terraform/v1/terraform_conjur
+#   annotations:
+#     authn/api-key: true
+
+# - !grant
+#   role: !group  vault/ADO_Secret/delegation/consumers
+#   member: !host /data/terraform/v1/terraform_conjur
